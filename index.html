@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gamer50082</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .icon {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: middle;
+            margin-right: 0.25rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 transition-colors duration-500">
+
+    <!-- Floating Header -->
+    <header id="header" class="fixed top-2 left-1/2 -translate-x-1/2 z-50 w-[95%] p-4
+                                 bg-indigo-200 dark:bg-indigo-900 shadow-lg rounded-full transition-colors duration-500">
+        <div class="container mx-auto flex items-center justify-between px-4">
+            <!-- Left Side: Name and Navigation -->
+            <div class="flex items-center space-x-6 text-black dark:text-white">
+                <a href="/" class="font-bold text-xl">gamer50082</a>
+                <nav class="space-x-4">
+                    <a href="https://oauth.gamer50082.com" class="p-2 rounded-full hover:bg-emerald-500 dark:hover:bg-emerald-700 transition-colors duration-200">OAuth</a>
+                    <a href="https://hosting.gamer50082.com" class="p-2 rounded-full hover:bg-sky-500 dark:hover:bg-sky-700 transition-colors duration-200">Hosting</a>
+                </nav>
+            </div>
+
+            <!-- Right Side: Theme Changer -->
+            <div class="flex items-center">
+                <!-- Theme changer button is hidden by default -->
+                <button id="theme-toggler" class="px-4 py-2 bg-indigo-300 text-black rounded-full transition-colors duration-200 font-bold hidden">Theme Changer</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="container mx-auto px-4 py-8 mt-24">
+        <div class="flex flex-col items-center text-center mb-16">
+            <h1 class="text-5xl font-extrabold mb-4 text-black dark:text-white">A space for innovation</h1>
+            <p class="text-lg text-gray-800 dark:text-gray-200 max-w-2xl">
+                Creating privacy and security focused products while providing efficient and cheap service.
+            </p>
+        </div>
+
+        <h2 class="text-3xl font-bold text-center mb-8 text-black dark:text-white">Explore products and services we provide:</h2>
+
+        <!-- Products Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- OAuth Box -->
+            <div class="bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-semibold mb-2 text-black dark:text-white">OAuth</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Ease · Secure · Private</p>
+                <a href="https://oauth.gamer50082.com" class="px-6 py-3 bg-emerald-500 text-white font-bold rounded-full hover:bg-emerald-600 transition-colors duration-200">
+                    Learn More
+                </a>
+            </div>
+
+            <!-- Hosting Box -->
+            <div class="bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center transition-transform transform hover:scale-105 duration-300">
+                <h3 class="text-2xl font-semibold mb-2 text-black dark:text-white">Hosting</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Fast · Simple · Cheap</p>
+                <a href="https://hosting.gamer50082.com" class="px-6 py-3 bg-sky-500 text-white font-bold rounded-full hover:bg-sky-600 transition-colors duration-200">
+                    Learn More
+                </a>
+            </div>
+
+            <!-- Coming Soon Box 1 -->
+            <div class="bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center opacity-50 cursor-not-allowed">
+                <h3 class="text-2xl font-semibold mb-2 text-black dark:text-white">Coming Soon</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Stay tuned for more products!</p>
+                <button class="px-6 py-3 bg-gray-400 dark:bg-gray-600 text-black rounded-full cursor-not-allowed">
+                    Coming Soon
+                </button>
+            </div>
+
+            <!-- Coming Soon Box 2 -->
+            <div class="bg-gray-100 dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col items-center text-center opacity-50 cursor-not-allowed">
+                <h3 class="text-2xl font-semibold mb-2 text-black dark:text-white">Coming Soon</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Stay tuned for more products!</p>
+                <button class="px-6 py-3 bg-gray-400 dark:bg-gray-600 text-black rounded-full cursor-not-allowed">
+                    Coming Soon
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // Theme logic
+        const THEME_COOKIE_NAME = 'website_theme';
+        const THEME_CHANGER_COOKIE_NAME = 'change_theme';
+        const htmlElement = document.documentElement;
+        const bodyElement = document.body;
+        const themeToggler = document.getElementById('theme-toggler');
+
+        // Function to get a cookie value by name
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/; SameSite=Strict";
+        }
+
+        // Apply theme from cookie or default to 'dark'
+        function applyTheme() {
+            const savedTheme = getCookie(THEME_COOKIE_NAME);
+
+            // Remove the initial black background
+            bodyElement.classList.remove('bg-gray-900');
+            
+            // Determine if the current theme is dark
+            const isDark = htmlElement.classList.contains('dark');
+
+            if (savedTheme === 'light') {
+                htmlElement.classList.remove('dark');
+                bodyElement.classList.add('bg-gray-100');
+                bodyElement.classList.remove('bg-gray-900');
+            } else {
+                htmlElement.classList.add('dark');
+                bodyElement.classList.add('bg-gray-900');
+                bodyElement.classList.remove('bg-gray-100');
+            }
+
+            // Update the theme toggler button text
+            if (themeToggler) {
+                const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+                themeToggler.innerText = `${currentTheme === 'dark' ? '🌙 Dark' : '☀️ Light'}`;
+            }
+        }
+
+        // Function to toggle the theme and update the cookie
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setCookie(THEME_COOKIE_NAME, newTheme, 365);
+            applyTheme();
+        }
+
+        // Check if the theme changer button should be visible
+        function checkThemeTogglerVisibility() {
+            const showToggler = getCookie(THEME_CHANGER_COOKIE_NAME);
+            if (showToggler === 'true') {
+                themeToggler.classList.remove('hidden');
+            } else {
+                themeToggler.classList.add('hidden');
+            }
+        }
+
+        // Event listener for theme toggler button
+        themeToggler.addEventListener('click', toggleTheme);
+
+        // Initial setup on page load
+        window.addEventListener('load', () => {
+            applyTheme();
+            checkThemeTogglerVisibility();
+        });
+    </script>
+
+</body>
+</html>
